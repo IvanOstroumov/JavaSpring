@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class Esercizio2ApplicationTests {
 
     @Test
-    void contextLoads() {
+    public void testProducts() throws Exception {
     }
 
 }

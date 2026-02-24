@@ -30,5 +30,9 @@ public class Product {
     @FutureOrPresent(message = "La data deve essere nel fututo o presente")
     private LocalDate expirationDate;
 
+    @NotBlank(message = "Il campo descrizione non può essere vuoto")
+    @Size(min = 10, max = 1000, message = "La descrizione deve essere tra 10 e 1000 caratteri")
+    private String description;
+
 
 }
