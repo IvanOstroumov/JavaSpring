@@ -48,14 +48,21 @@ public class CustomerController {
 
     @GetMapping("/{surnameToFilter}")
     public String loadInsertPage(Model model, @PathVariable String surnameToFilter) {
-        List<Customer> filteredCustomers = customerRepository.findBySurname(surnameToFilter);
+        List<Customer> filteredCustomers = customerRepository.findBySurnameIgnoreCase(surnameToFilter);
         model.addAttribute("customers", filteredCustomers);
         return "customerList";
     }
 
     @GetMapping("/customersbycity")
     public String loadCustomersByCity(Model model, @RequestParam(value = "city", required = true) String city) {
-        List<Customer> filteredCustomers = customerRepository.findByCity(city);
+        List<Customer> filteredCustomers = customerRepository.findByCityIgnoreCase(city);
+        model.addAttribute("customers", filteredCustomers);
+        return "customerList";
+    }
+
+    @GetMapping("/customersbyage")
+    public String loadCustomersByAge(Model model, @RequestParam(value = "maxage", required = true) Integer age) {
+        List<Customer> filteredCustomers = customerRepository.findByAgeLessThan(age);
         model.addAttribute("customers", filteredCustomers);
         return "customerList";
     }

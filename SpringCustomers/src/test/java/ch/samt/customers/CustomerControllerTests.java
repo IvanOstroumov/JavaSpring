@@ -14,10 +14,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@AutoConfigureMockMvc  // Abilita l'uso di MockMvc che ci permette di simulare le chiamate HTTP (GET, POST, ecc..)
-@SpringBootTest  // Avvia l'applicazione Spring con tutte le sue componenti
+@AutoConfigureMockMvc
+@SpringBootTest
 @Transactional
-// Non del tutto necessario qua, ma assicura che ogni test sia eseguito in modo transazionale (tutto o niente, modifiche incomplete vengono annullate)
 public class CustomerControllerTests {
 
     @Autowired
@@ -29,7 +28,7 @@ public class CustomerControllerTests {
     @Test
     public void testLoadCustomers() throws Exception {
         mockMvc.perform(get("/customers"))
-                .andExpect(status().isOk())  // Verifica che lo stato sia OK (200)
+                .andExpect(status().isOk())
                 .andExpect(view().name("customerList"))  // Verifica che la vista sia "customerList"
                 .andExpect(model().attribute("customers", customerRepository.findAll()))  // Verifica che i clienti contenuti in "customers" siano esattamente quelli della chiamata "customerRepository.findAll()"
                 .andExpect(model().attribute("customers", hasSize(3)))  // Verifica il numero di clienti
@@ -59,7 +58,7 @@ public class CustomerControllerTests {
                 .andExpect(redirectedUrl("/customers"));  // Verifica la redirezione a /customers
 
         // Verifica che Bartali sia ora presente in DB
-        Customer savedCustomer = customerRepository.findBySurname("Tranitas").get(0);
+        Customer savedCustomer = customerRepository.findBySurnameIgnoreCase("Tranitas").get(0);
         assert savedCustomer != null;
         assert savedCustomer.getName().equals("WIBIBI");
         assert savedCustomer.getAge().equals(20);
@@ -76,7 +75,7 @@ public class CustomerControllerTests {
                 .andExpect(model().attributeHasFieldErrors("customer", "age"));  // Verifica l'errore sul campo "age"
 
         // Verifica che Fausto Coppi NON sia stato inserito in DB
-        assert customerRepository.findBySurname("Coppi").isEmpty();
+        assert customerRepository.findBySurnameIgnoreCase("Coppi").isEmpty();
         //  Provare a commentare la validation sul campo "age" e verificare che questo test fallisce
     }
 
@@ -86,15 +85,15 @@ public class CustomerControllerTests {
                 .andExpect(status().isOk())  // Verifica che lo stato sia OK (200)
                 .andExpect(view().name("customerList"))  // Verifica che la vista sia "customerList"
                 .andExpect(model().attributeExists("customers"))  // Verifica che il modello contenga "customers"
-                .andExpect(model().attribute("customers", customerRepository.findBySurname("Tran")));  // Verifica che "customer" contenga il risultato della query
+                .andExpect(model().attribute("customers", customerRepository.findBySurnameIgnoreCase("Tran")));  // Verifica che "customer" contenga il risultato della query
     }
 
     @Test
     public void testLoadCustomersByCity() throws Exception {
         mockMvc.perform(get("/customers/customersbycity?city=Arbedo-Castione"))
-                .andExpect(status().isOk())  // Verifica che lo stato sia OK (200)
-                .andExpect(view().name("customerList"))  // Verifica che la vista sia "customerList"
-                .andExpect(model().attributeExists("customers"))  // Verifica che il modello contenga "customers"
-                .andExpect(model().attribute("customers", customerRepository.findBySurname("Tran")));  // Verifica che "customer" contenga il risultato della query
+                .andExpect(status().isOk())
+                .andExpect(view().name("customerList"))
+                .andExpect(model().attributeExists("customers"))
+                .andExpect(model().attribute("customers", customerRepository.findBySurnameIgnoreCase("Tran")));
     }
 }
