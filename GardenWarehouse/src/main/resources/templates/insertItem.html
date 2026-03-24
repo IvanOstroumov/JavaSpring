@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New item</title>
+    <style>body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f6f8;
+        margin: 40px;
+    }
+
+    /* TITOLI */
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    /* FORM */
+    form {
+        max-width: 400px;
+        margin: auto;
+        padding: 25px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form div {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #2c7be5;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 15px;
+    }
+
+    button:hover {
+        background-color: #1a68d1;
+        cursor: pointer;
+    }
+
+    /* ERRORI */
+    .validationError {
+        color: red;
+        font-size: 13px;
+    }
+
+    /* TABLE */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #2c7be5;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f2f2f2;
+    }</style>
+</head>
+<body>
+<h1>Insert new item</h1>
+
+<form method="POST" th:object="${item}">
+    <div>
+        <label for="code">Code:</label>
+        <input type="text" id="code" th:field="${item.code}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('code')}"
+              th:errors="${item.code}">Code Error</span>
+    </div>
+    <div>
+        <label for="type">Type:</label>
+        <input type="text" id="type" th:field="${item.type}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('type')}"
+              th:errors="${item.type}">Type Error</span>
+    </div>
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="${item.name}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('name')}"
+              th:errors="${item.name}">Name Error</span>
+    </div>
+
+    <div>
+        <label for="price">Price:</label>
+        <input type="text" id="price" th:field="${item.price}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('price')}"
+              th:errors="${item.price}">Price Error</span>
+    </div>
+
+    <div>
+        <label for="itemcount">Item Count:</label>
+        <input type="number" id="itemcount" th:field="${item.itemcount}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('itemcount')}"
+              th:errors="${item.itemcount}">Item count Error</span>
+    </div>
+    <div>
+        <button type="submit">Save</button>
+    </div>
+</form>
+
+</body>
+</html>
+

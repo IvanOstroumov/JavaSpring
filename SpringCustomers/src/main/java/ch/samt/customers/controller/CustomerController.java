@@ -2,6 +2,7 @@ package ch.samt.customers.controller;
 
 import ch.samt.customers.data.CustomerRepository;
 import ch.samt.customers.domain.Customer;
+import ch.samt.customers.service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,17 +19,17 @@ import java.util.stream.Collectors;
 @Controller
 public class CustomerController {
 
-    private CustomerRepository customerRepository;
+    private CustomerService customerService;
 
     @Autowired
-    public CustomerController(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
 
     @GetMapping
     public String loadCustomers(Model model) {
-        model.addAttribute("customers", customerRepository.findAll());
+        model.addAttribute("customers", customerService.getAllUsers());
         return "customerList";
     }
 
@@ -42,27 +43,27 @@ public class CustomerController {
         if (errors.hasErrors()) {
             return "insertCustomer";
         }
-        customerRepository.save(customer);
+        customerService.save(customer);
         return "redirect:/customers";
     }
 
     @GetMapping("/{surnameToFilter}")
     public String loadInsertPage(Model model, @PathVariable String surnameToFilter) {
-        List<Customer> filteredCustomers = customerRepository.findBySurnameIgnoreCase(surnameToFilter);
+        List<Customer> filteredCustomers = customerService.findBySurnameIgnoreCase(surnameToFilter);
         model.addAttribute("customers", filteredCustomers);
         return "customerList";
     }
 
     @GetMapping("/customersbycity")
     public String loadCustomersByCity(Model model, @RequestParam(value = "city", required = true) String city) {
-        List<Customer> filteredCustomers = customerRepository.findByCityIgnoreCase(city);
+        List<Customer> filteredCustomers = customerService.findByCityIgnoreCase(city);
         model.addAttribute("customers", filteredCustomers);
         return "customerList";
     }
 
     @GetMapping("/customersbyage")
     public String loadCustomersByAge(Model model, @RequestParam(value = "maxage", required = true) Integer age) {
-        List<Customer> filteredCustomers = customerRepository.findByAgeLessThan(age);
+        List<Customer> filteredCustomers = customerService.findByAgeLessThan(age);
         model.addAttribute("customers", filteredCustomers);
         return "customerList";
     }
