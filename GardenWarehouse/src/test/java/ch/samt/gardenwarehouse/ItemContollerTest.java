@@ -51,7 +51,7 @@ public class ItemContollerTest {
         mockMvc.perform(get("/items/sell?code=faq-67"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("itemList"));
-        Item savedItem = itemRepository.findByCodeIgnoreCase("faq-67").get(0);
+        Item savedItem = itemRepository.findByCodeIgnoreCase("faq-67").getFirst();
         assert savedItem.getItemcount() == 1232;
     }
 
@@ -60,7 +60,7 @@ public class ItemContollerTest {
         mockMvc.perform(get("/items/add?code=faq-67&number=10"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("itemList"));
-        Item savedItem = itemRepository.findByCodeIgnoreCase("faq-67").get(0);
+        Item savedItem = itemRepository.findByCodeIgnoreCase("faq-67").getFirst();
         assert savedItem.getItemcount() == 1243;
     }
 
@@ -83,7 +83,7 @@ public class ItemContollerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/items"));
 
-        Item savedItem = itemRepository.findByCodeIgnoreCase("jak-12").get(0);
+        Item savedItem = itemRepository.findByCodeIgnoreCase("jak-12").getFirst();
         assert savedItem != null;
         assert savedItem.getName().equals("Quan True");
         assert savedItem.getPrice() == 0.99;

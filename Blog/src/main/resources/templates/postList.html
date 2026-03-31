@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Items</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* TITOLO */
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        /* CONTENITORE CENTRALE */
+        .blog-container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        /* CARD POST */
+        .post {
+            background: white;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s ease;
+        }
+
+        .post:hover {
+            transform: translateY(-4px);
+        }
+
+        /* TITOLO POST */
+        .post h2 {
+            margin-top: 0;
+            color: #2c7be5;
+        }
+
+        /* META INFO (data, categoria, autore) */
+        .meta {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        /* CONTENUTO */
+        .content {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        /* FOOTER (likes) */
+        .footer {
+            font-size: 14px;
+            font-weight: bold;
+            color: #e63946;
+        }
+    </style>
+</head>
+<body>
+
+<h1>My Blog</h1>
+
+<div class="blog-container">
+
+    <div class="post" th:each="post : ${posts}">
+
+        <h2 th:text="${post.title}"></h2>
+
+        <p class="meta">
+            <span th:text="${#dates.format(post.pubdate, 'dd MMM yyyy')}"></span>
+            •
+            <span th:text="${post.category}"></span>
+            •
+            <span th:text="${post.author}"></span>
+        </p>
+
+        <p class="content" th:text="${post.content}"></p>
+
+        <div class="footer">
+            ❤️ <span th:text="${post.likes}"></span> Likes
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

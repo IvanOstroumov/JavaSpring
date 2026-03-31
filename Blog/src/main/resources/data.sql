@@ -1,0 +1,4 @@
+delete from Post;
+insert into Post(id, title, pubdate, category, author, likes, content) values (NEXT VALUE FOR post_seq,'Come farmare l aura', '2026-03-30', 'Guides', 'Ivan', 99999, 'Per farmare l aura bisogna essere full non curante tutto il tempo');
+insert into Post(id, title, pubdate, category, author, likes, content) values (NEXT VALUE FOR post_seq,'Perché Ronaldo 7 è l unico GOAT', '2026-01-01', 'Facts', 'Messi', 777777, 'Semplicemente perche si chiama cosi e quindi è gia figo');
+insert into Post(id, title, pubdate, category, author, likes, content) values (NEXT VALUE FOR post_seq,'Tempi antichi', '2023-02-01', 'Stories', 'A random guy', 13, 'Skibidi sigma 67Skibidi sigma 67Skibidi sigma 67Skibidi sigma 67Skibidi sigma 67Skibidi sigma 67Skibidi sigma 67Skibidi sigma 67Skibidi sigma 67Skibidi sigma 67Skibidi sigma 67Skibidi sigma 67Skibidi sigma 67Skibidi sigma 67');

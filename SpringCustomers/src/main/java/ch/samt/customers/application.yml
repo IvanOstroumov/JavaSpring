@@ -1,0 +1,46 @@
+spring:
+  sql:
+    init:
+      schema-locations:
+        - classpath:schema.sql
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+---
+
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  sql:
+    init:
+      data-locations:
+        - classpath:/data.sql
+      mode: always
+  datasource:
+    generate-unique-name: false
+    url: jdbc:h2:file:./h2_file/dev
+    driver-class-name: org.h2.Driver
+server:
+  port: 8080
+
+---
+
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  sql:
+    init:
+      data-locations:
+        - classpath:/dataProd.sql
+      mode: always
+  datasource:
+    generate-unique-name: false
+    url: jdbc:h2:file:./h2_file/prod
+    driver-class-name: org.h2.Driver
+server:
+  port: 8090
