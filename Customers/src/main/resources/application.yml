@@ -1,0 +1,36 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    defer-datasource-initialization: true
+
+  datasource:
+    generate-unique-name: false
+  sql:
+    init:
+      data-locations:
+        - classpath:/db/addressData.sql
+        - classpath:/db/customerData.sql
+        - classpath:/db/reservationData.sql
+---
+
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+server:
+   port: 8080
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+server:
+  port: 8090

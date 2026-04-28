@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New customer</title>
+</head>
+<link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+<body>
+
+<nav class="main-nav">
+    <a href="/customers">Customer list</a>
+    <a href="/customers/reservations">Reservation list</a>
+    <a href="/customers/insert">New Customer</a>
+</nav>
+
+<h1>Insert new customer</h1>
+
+<form method="POST" th:object="${customer}">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="${customer.name}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('name')}"
+              th:errors="${customer.name}">Name Error</span>
+
+    </div>
+    <div>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" th:field="${customer.surname}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('surname')}"
+              th:errors="${customer.surname}">Name Error</span>
+    </div>
+    <div>
+        <label for="age">Age:</label>
+        <input type="number" id="age" th:field="${customer.age}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('age')}"
+              th:errors="${customer.age}">Name Error</span>
+    </div>
+    <div>
+        <label for="street">Street:</label>
+        <input type="text" id="street" th:field="${customer.address.street}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('address.street')}"
+              th:errors="${customer.address.street}">Street Error</span>
+    </div>
+    <div>
+        <label for="num">Num:</label>
+        <input type="number" id="num" th:field="${customer.address.num}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('address.num')}"
+              th:errors="${customer.address.num}">Num Error</span>
+    </div>
+    <div>
+    <label for="zip">ZIP:</label>
+    <input type="number" id="zip" th:field="${customer.address.zip}"/>
+    <span class="validationError" th:if="${#fields.hasErrors('address.zip')}"
+          th:errors="${customer.address.zip}">ZIP Error</span>
+</div>
+    <div>
+    <label for="city">City:</label>
+    <input type="text" id="city" th:field="${customer.address.city}"/>
+    <span class="validationError" th:if="${#fields.hasErrors('address.city')}"
+          th:errors="${customer.address.city}">City Error</span>
+</div>
+    <div>
+    <label for="nation">Nation:</label>
+    <input type="text" id="nation" th:field="${customer.address.nation}"/>
+    <span class="validationError" th:if="${#fields.hasErrors('address.nation')}"
+          th:errors="${customer.address.nation}">Nation Error</span>
+</div>
+    <div>
+        <button type="submit">Save</button>
+    </div>
+</form>
+
+</body>
+</html>
