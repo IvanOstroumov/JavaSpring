@@ -1,6 +1,7 @@
 package ch.samt.tournament.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
@@ -15,5 +16,4 @@ public class GameProfile {
     @NotBlank
     @Size(min = 3, max = 30, message = "Lunghezza consentita tra 3 e 30 caratteri")
     private String nickname;
-
 }

@@ -12,3 +12,6 @@ spring:
   sql:
     init:
       data-locations:
+        - classpath:/db/gameProfileData.sql
+        - classpath:/db/teamData.sql
+        - classpath:/db/playerData.sql

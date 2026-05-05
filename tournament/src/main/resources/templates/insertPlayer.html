@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Player</title>
+</head>
+<link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+<body>
+
+<nav class="main-nav">
+    <a href="/tournament">Player list</a>
+    <a href="/tournament/insert">New Player</a>
+    <a href="/tournament/teams">Team list</a>
+    <a href="/tournament/teams/insert">New Team</a>
+</nav>
+
+<h1>Insert new player</h1>
+
+<form method="POST" th:object="${player}">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="${player.name}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('name')}"
+              th:errors="${player.name}">Name Error</span>
+
+    </div>
+    <div>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" th:field="${player.surname}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('surname')}"
+              th:errors="${player.surname}">Name Error</span>
+    </div>
+    <div>
+        <label for="age">Age:</label>
+        <input type="number" id="age" th:field="${player.age}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('age')}"
+              th:errors="${player.age}">Name Error</span>
+    </div>
+    <div>
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" th:field="${player.gender}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('gender')}"
+              th:errors="${player.gender}">Gender Error</span>
+    </div>
+    <div>
+        <label for="race">Race:</label>
+        <input type="text" id="race" th:field="${player.race}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('race')}"
+              th:errors="${player.race}">Race Error</span>
+    </div>
+    <div>
+    <label for="city">City:</label>
+    <input type="text" id="city" th:field="${player.city}"/>
+    <span class="validationError" th:if="${#fields.hasErrors('city')}"
+          th:errors="${player.city}">City Error</span>
+</div>
+    <div>
+    <label for="team">Team:</label>
+        <select id="team" th:field="${player.team}">
+            <option value="">-- Select Team --</option>
+            <option th:each="t : ${teams}"
+                    th:value="${t.id}"
+                    th:text="${t.name}">
+            </option>
+        </select>
+    <span class="validationError" th:if="${#fields.hasErrors('team')}"
+          th:errors="${player.team}">Team Error</span>
+</div>
+    <div>
+    <label for="nickname">Nickname:</label>
+        <input type="text" id="nickname" th:field="*{gameProfile.nickname}"/>
+    <span class="validationError" th:if="${#fields.hasErrors('gameProfile')}"
+          th:errors="${player.gameProfile}">Nickname Error</span>
+</div>
+    <div>
+        <button type="submit">Save</button>
+    </div>
+</form>
+
+</body>
+</html>

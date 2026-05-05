@@ -1,6 +1,7 @@
 package ch.samt.tournament.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.ToString;
@@ -22,4 +23,6 @@ public class Team {
     @ToString.Exclude
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private List<Player> players;
+
+    private boolean isdeleted = false;
 }

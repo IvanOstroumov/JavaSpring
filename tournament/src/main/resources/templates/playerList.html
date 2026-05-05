@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Players</title>
+</head>
+<link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+<body>
+
+<nav class="main-nav">
+    <a href="/tournament">Player list</a>
+    <a href="/tournament/insert">New Player</a>
+    <a href="/tournament/teams">Team list</a>
+    <a href="/tournament/teams/insert">New Team</a>
+</nav>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Race</th>
+        <th>City</th>
+        <th>Team</th>
+        <th>Game Profile</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="player : ${players}">
+        <td th:text="${player.id}"></td>
+        <td th:text="${player.name}"></td>
+        <td th:text="${player.surname}"></td>
+        <td th:text="${player.age}"></td>
+        <td th:text="${player.gender}"></td>
+        <td th:text="${player.race}"></td>
+        <td th:text="${player.city}"></td>
+        <td th:text="${player.team.name}"></td>
+        <td th:text="${player.gameProfile.nickname}"></td>
+        <td><a th:href="@{/tournament/delete/{id}(id=${player.id})}">Delet dis</a></td>
+    </tr>
+
+
+    </tbody>
+</table>
+
+</body>
+</html>

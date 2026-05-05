@@ -3,6 +3,7 @@ package ch.samt.tournament.domain;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
@@ -17,7 +18,11 @@ public class Player {
     @Size(min = 3, max = 30, message = "Lunghezza consentita tra 3 e 50 caratteri")
     private String name;
 
-    @NotEmpty
+    @NotBlank
+    @Size(min = 3, max = 30, message = "Lunghezza consentita tra 3 e 50 caratteri")
+    private String surname;
+
+    @NotNull
     @Max(100)
     @Min(1)
     private int age;
@@ -34,7 +39,7 @@ public class Player {
     @Size(min = 3, max = 30, message = "Lunghezza consentita tra 3 e 30 caratteri")
     private String city;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "team_id")
     @Valid
     private Team team;
@@ -43,4 +48,6 @@ public class Player {
     @JoinColumn(name = "gameprofile_id")
     @Valid
     private GameProfile gameProfile;
+
+    private boolean isdeleted = false;
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Players</title>
+</head>
+<link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+<body>
+
+<nav class="main-nav">
+    <a href="/tournament">Player list</a>
+    <a href="/tournament/insert">New Player</a>
+    <a href="/tournament/teams">Team list</a>
+    <a href="/tournament/teams/insert">New Team</a>
+</nav>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Players</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="team : ${teams}">
+        <td th:text="${team.id}"></td>
+        <td th:text="${team.name}"></td>
+        <td>
+            <ul>
+                <li th:each="player : ${team.players}"
+                    th:text="${player.name + ' ' + player.surname}">
+                </li>
+            </ul>
+        </td>
+        <td><a th:href="@{/tournament/teams/delete/{id}(id=${team.id})}">Delet dis</a></td>
+    </tr>
+
+
+    </tbody>
+</table>
+
+</body>
+</html>
