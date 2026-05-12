@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    defer-datasource-initialization: true
+
+  datasource:
+    generate-unique-name: false
+  sql:
+    init:
+      data-locations:
+        - classpath:/db/addressData.sql
+        - classpath:/db/customerData.sql
+        - classpath:/db/reservationData.sql
+        - classpath:/db/mealGroupData.sql

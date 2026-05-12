@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New customer</title>
+</head>
+<link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+<body>
+
+<nav class="main-nav">
+    <a href="/customers">Customer list</a>
+    <a href="/customers/reservations">Reservation list</a>
+    <a href="/customers/mealgroups">Meal Groups list</a>
+    <a href="/customers/insert">New Customer</a>
+    <a href="/customers/addCustomerToMealGroup">Add Customer to Meal Group</a>
+</nav>
+
+<h1>Insert customer in a meal group</h1>
+
+<form th:action="@{/customers/addCustomerToMealGroup}" method="post"><label for="customerId">Customer:</label>
+    <select name="customerId" id="customerId">
+        <option th:each="customer: ${customers}"  th:value="${customer.id}" 
+                th:text="${customer.name} + ' ' + ${customer.surname}">
+        </option>
+         </select> <label for="mealGroupId">Meal group:</label> <select name="mealGroupId" id="mealGroupId">
+        <option th:each="mealGroup: ${mealGroups}"  th:value="${mealGroup.id}"  th:text="${mealGroup.name}"></option>
+         </select>
+    <button type="submit">Aggiungi</button>
+    
+</form>
+
+
+</body>
+</html>

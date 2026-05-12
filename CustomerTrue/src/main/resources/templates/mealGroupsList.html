@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations</title>
+</head>
+<link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+<body>
+
+<nav class="main-nav">
+    <a href="/customers">Customer list</a>
+    <a href="/customers/reservations">Reservation list</a>
+    <a href="/customers/mealgroups">Meal Groups list</a>
+    <a href="/customers/insert">New Customer</a>
+    <a href="/customers/addCustomerToMealGroup">Add Customer to Meal Group</a>
+</nav>
+
+<div th:each="mealGroup: ${mealgroups}">
+    <div class="table-header" th:text="'Ospiti del gruppo '  + ${mealGroup.name} + ':'"></div>
+    <table>
+        <thead>
+            <th th:text="Nome"></th>
+            <th th:text="Cognome"></th>
+        </thead>
+        <tbody>
+            <tr th:each="customer:${mealGroup.customers}">
+                <td th:text="${customer.name}"></td>
+                <td th:text="${customer.surname}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
