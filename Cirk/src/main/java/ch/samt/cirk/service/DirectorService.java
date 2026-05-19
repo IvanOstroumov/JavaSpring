@@ -32,4 +32,7 @@ public class DirectorService {
             e.printStackTrace();
         }
     }
+    public Director findBySurnameIgnoreCase(String surname) {
+        return directorRepository.findBySurnameIgnoreCase(surname);
+    }
 }

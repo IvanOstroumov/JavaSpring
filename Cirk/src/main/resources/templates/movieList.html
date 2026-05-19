@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+</head>
+<link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+<body>
+
+<nav class="main-nav">
+    <a href="/movies">Movie list</a>
+    <a href="/movies/insert">New movie</a>
+    <a href="/movies/actor/insert">New actor</a>
+    <a href="/movies/director/insert">New director</a>
+</nav>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Genre</th>
+        <th>Director</th>
+        <th>Actors</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="movie : ${movies}">
+        <td th:text="${movie.id}"></td>
+        <td th:text="${movie.title}"></td>
+        <td th:text="${movie.genre}"></td>
+        <td th:text="${movie.director.name + ' ' + movie.director.surname}"></td>
+        <td>
+            <span th:each="actor, stat : ${movie.actors}">
+                <span th:text="${actor.name + ' ' + actor.surname}"></span>
+                <span th:if="${!stat.last}">, </span>
+            </span>
+        </td>
+    </tr>
+
+
+    </tbody>
+</table>
+</body>
+</html>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MovieService {
@@ -31,5 +32,8 @@ public class MovieService {
         } catch(Exception e){
             e.printStackTrace();
         }
+    }
+    public List<Movie> findByTitleIgnoreCase(String title) {
+        return movieRepository.findByTitleIgnoreCase(title);
     }
 }

@@ -23,6 +23,6 @@ public class Actor {
     @Size(min = 3, max = 30, message = "Lunghezza consentita tra 3 e 30 caratteri")
     private String surname;
 
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany(mappedBy = "actors")
     private List<Movie> movies;
 }

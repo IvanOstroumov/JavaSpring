@@ -39,7 +39,9 @@ public class CirkController {
         return "movieList";
     }
     @GetMapping("/insert")
-    public String loadInsertPage(@ModelAttribute Movie movie) {
+    public String loadInsertPage(@ModelAttribute Movie movie, Model model) {
+        model.addAttribute("directors", directorService.getAllDirectors());
+        model.addAttribute("actors", actorService.getAllActors());
         return "insertMovie";
     }
 

@@ -56,7 +56,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{surnameToFilter}")
-    public String loadBySurname(Model model, @PathVariable String surnameToFilter) {
+    public String loadBySurname(Model model, @PathVariable String surnameToFilter) throws InterruptedException {
         List<Customer> filteredCustomers = customerService.findBySurnameIgnoreCase(surnameToFilter);
         model.addAttribute("customers", filteredCustomers);
         return "customerList";

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ActorService{
@@ -29,5 +30,9 @@ public class ActorService{
         } catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public Actor findBySurnameIgnoreCase(String surname) {
+        return actorRepository.findBySurnameIgnoreCase(surname);
     }
 }
